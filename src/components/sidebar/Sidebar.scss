@@ -3,4 +3,21 @@
   flex: 0.35;
   height: 100vh;
   background-color: gray;
+
+  .sidebarRight {
+    background-color: black;
+    width: 250px;
+  }
+
+  .sidebarTop {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+
+  }
+
+
+
 }
