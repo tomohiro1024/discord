@@ -2,4 +2,32 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+
+  .chatMessage {
+    flex-grow: 1;
+  }
+
+  .chatInput {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background-color: rgb(35, 35, 35);
+    border-radius: 4px;
+    margin: 20px;
+
+    form {
+      flex-grow: 1;
+      input {
+        padding: 15px;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: white;
+        width: 90%;
+        font-size: 15px;
+      }
+      
+    }
+  }
 }
