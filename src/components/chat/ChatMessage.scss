@@ -1,0 +1,23 @@
+.message {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  color: white;
+
+  .icon {
+    font-size: 40px;
+  }
+
+  .messageInfo {
+    padding: 20px 20px 20px 15px;
+  }
+
+  .messageTime {
+    color: gray;
+    margin-left: 20px;
+  }
+
+  p {
+    padding-top: 5px;
+  }
+}
