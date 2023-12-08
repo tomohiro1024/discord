@@ -2,6 +2,7 @@ import React from 'react'
 import './Chat.scss'
 import ChatHeader from './ChatHeader'
 import ChatMessage from './ChatMessage'
+import ChatIcon from '@mui/icons-material/Chat';
 
 const Chat = () => {
   return (
