@@ -6,3 +6,6 @@ export const store = configureStore({
 })
 
 export type AppDispatch = typeof store.dispatch
+
+// 現在の状態の型を返す
+export type RootState = ReturnType<typeof store.getState>

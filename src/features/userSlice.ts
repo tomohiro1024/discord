@@ -5,6 +5,7 @@ const initialState: initialUserState = {
   user: null
 }
 
+// userSliceはユーザーがログイン、ログアウトしているかなどの監視をしている。
 export const userSlice = createSlice({
   name: "user",
   initialState: initialState,
