@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Sidebar.scss'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -6,11 +6,35 @@ import SidebarChannel from './SidebarChannel';
 import { auth } from '../../firebase';
 
 const Sidebar = () => {
+  const [showDialog, setShowDialog] = useState(false);
+  const handleSignOut = () => {
+    setShowDialog(true); // ダイアログを表示するための状態を更新
+  };
+
+  const handleConfirmSignOut = () => {
+    auth.signOut(); // ログアウトを実行
+    setShowDialog(false); // ダイアログを非表示にする
+  };
+
+  const handleCancelSignOut = () => {
+    setShowDialog(false); // ダイアログを非表示にする
+  };
   return (
     <div className='sidebar'>
+      <div className='dialog'>
+      {showDialog && (
+        <div className="dialog">
+          <p>ログアウトしますか？</p>
+          <button onClick={handleConfirmSignOut}>はい</button>
+          <button onClick={handleCancelSignOut}>いいえ</button>
+        </div>
+      )}
+      </div>
+      
       <div className='sidebarLeft'>
         <div className='serverIcon'>
-          <img src="./logout.png" alt="" onClick={() => auth.signOut()} />
+        
+          <img src="./logout.png" alt="" onClick={handleSignOut}/>
         </div>
       </div>
       <div className='sidebarRight'>

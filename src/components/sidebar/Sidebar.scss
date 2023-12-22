@@ -4,6 +4,14 @@
   height: 100vh;
   // background-color: gray;
 
+  .dialog {
+    background-color: #fff;
+
+    button {
+      margin-left: 5px;
+    }
+  }
+
   .sidebarLeft {
     display: flex;
     flex-direction: column;
