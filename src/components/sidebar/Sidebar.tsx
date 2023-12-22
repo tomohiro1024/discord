@@ -3,13 +3,14 @@ import './Sidebar.scss'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import SidebarChannel from './SidebarChannel';
+import { auth } from '../../firebase';
 
 const Sidebar = () => {
   return (
     <div className='sidebar'>
       <div className='sidebarLeft'>
         <div className='serverIcon'>
-          <img src="./logout.png" alt="" />
+          <img src="./logout.png" alt="" onClick={() => auth.signOut()} />
         </div>
       </div>
       <div className='sidebarRight'>
