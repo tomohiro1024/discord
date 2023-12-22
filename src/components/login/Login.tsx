@@ -16,7 +16,7 @@ const Login = () => {
     <div className='login'>
       <div className='loginForm'>
       </div>
-      <Button onClick={signIn}>ログイン</Button>
+      <Button onClick={signIn}>Googleログイン</Button>
     </div>
   )
 }
