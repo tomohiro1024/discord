@@ -4,8 +4,12 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import SidebarChannel from './SidebarChannel';
 import { auth } from '../../firebase';
+import { useAppSelector } from '../../app/hooks';
 
 const Sidebar = () => {
+  // 現状のユーザーの情報を取得
+  const user = useAppSelector((state) => state.user)
+
   const [showDialog, setShowDialog] = useState(false);
   const handleSignOut = () => {
     setShowDialog(true); // ダイアログを表示するための状態を更新
@@ -33,7 +37,9 @@ const Sidebar = () => {
       
       <div className='sidebarLeft'>
         <div className='serverIcon'>
-        
+          <img src={user?.photo} alt=""/>
+        </div>
+        <div className='serverIcon'>
           <img src="./logout.png" alt="" onClick={handleSignOut}/>
         </div>
       </div>
