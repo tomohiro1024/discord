@@ -44,9 +44,9 @@ const Sidebar = () => {
         </div>
       </div>
       <div className='sidebarRight'>
-        <div className='sidebarTop'>
+        {/* <div className='sidebarTop'>
           <h3>Menu</h3>
-        </div>
+        </div> */}
         <div className='sidebarChannel'>
           <div className='sidebarChannelHeader'>
             <div className='sidebarHeader'>
