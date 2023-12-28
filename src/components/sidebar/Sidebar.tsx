@@ -1,14 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Sidebar.scss'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import SidebarChannel from './SidebarChannel';
-import { auth } from '../../firebase';
+import { auth, db } from '../../firebase';
 import { useAppSelector } from '../../app/hooks';
+import { collection, query } from 'firebase/firestore/lite';
+import { onSnapshot } from 'firebase/firestore'
 
 const Sidebar = () => {
   // 現状のユーザーの情報を取得
   const user = useAppSelector((state) => state.user)
+
+  const q = query(collection(db, "channels"))
+
+  useEffect(() => {
+    onSnapshot(q, (querySnapshot) =>{
+      const channelsResults =[]
+      querySnapshot.docs.forEach((doc) => console.log(doc))
+    })
+  }, [])
 
   const [showDialog, setShowDialog] = useState(false);
   const handleSignOut = () => {
