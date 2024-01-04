@@ -5,8 +5,8 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import SidebarChannel from './SidebarChannel';
 import { auth, db } from '../../firebase';
 import { useAppSelector } from '../../app/hooks';
-import { collection, query } from 'firebase/firestore/lite';
-import { onSnapshot } from 'firebase/firestore'
+// import { collection, query } from 'firebase/firestore/lite';
+import { onSnapshot, collection, query } from 'firebase/firestore'
 
 const Sidebar = () => {
   // 現状のユーザーの情報を取得
