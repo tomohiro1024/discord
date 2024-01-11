@@ -9,6 +9,7 @@ import { useAppSelector } from '../../app/hooks';
 import { onSnapshot, collection, query } from 'firebase/firestore'
 
 const Sidebar = () => {
+  const [channels, setChannles] = useState()
   // 現状のユーザーの情報を取得
   const user = useAppSelector((state) => state.user)
 
@@ -17,7 +18,13 @@ const Sidebar = () => {
   useEffect(() => {
     onSnapshot(q, (querySnapshot) =>{
       const channelsResults =[]
-      querySnapshot.docs.forEach((doc) => console.log(doc))
+      querySnapshot.docs.forEach((doc) => 
+      // console.log(doc.id, doc.data())
+      channelsResults.push({
+        id: doc.id,
+        channel: doc.data()
+      })
+      )
     })
   }, [])
 
