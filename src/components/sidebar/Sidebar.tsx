@@ -6,10 +6,16 @@ import SidebarChannel from './SidebarChannel';
 import { auth, db } from '../../firebase';
 import { useAppSelector } from '../../app/hooks';
 // import { collection, query } from 'firebase/firestore/lite';
-import { onSnapshot, collection, query } from 'firebase/firestore'
+import { onSnapshot, collection, query, DocumentData } from 'firebase/firestore'
+import { channel } from 'diagnostics_channel';
+
+interface Channel {
+  id: string;
+  channel: DocumentData;
+}
 
 const Sidebar = () => {
-  const [channels, setChannles] = useState()
+  const [channels, setChannels] = useState<Channel[]>([])
   // 現状のユーザーの情報を取得
   const user = useAppSelector((state) => state.user)
 
@@ -17,7 +23,7 @@ const Sidebar = () => {
 
   useEffect(() => {
     onSnapshot(q, (querySnapshot) =>{
-      const channelsResults =[]
+      const channelsResults: Channel[] =[]
       querySnapshot.docs.forEach((doc) => 
       // console.log(doc.id, doc.data())
       channelsResults.push({
@@ -25,6 +31,7 @@ const Sidebar = () => {
         channel: doc.data()
       })
       )
+      setChannels(channelsResults)
     })
   }, [])
 
@@ -73,9 +80,12 @@ const Sidebar = () => {
             <AddCircleIcon className='sidebarIcon' />
           </div>
           <div className='sidebarChannelList'>
-            <SidebarChannel />
-            <SidebarChannel />
-            <SidebarChannel />
+            {channels.map((channel) => (
+              <SidebarChannel />
+            ))}
+            
+            {/* <SidebarChannel />
+            <SidebarChannel /> */}
           </div>
         </div>
       </div>
