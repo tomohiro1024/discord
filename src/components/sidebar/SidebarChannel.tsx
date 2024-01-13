@@ -1,13 +1,22 @@
 import React from 'react'
 import './SidebarChannel.scss'
 import ChatIcon from '@mui/icons-material/Chat';
+import { DocumentData } from 'firebase/firestore';
 
-const SidebarChannel = () => {
+type Props = {
+  id: string;
+  channel: DocumentData;
+
+}
+
+const SidebarChannel = (props: Props) => {
+  const {id, channel} = props
+  console.log(channel)
   return (
     <div className='sidebarChannel'>
       <h4>
         <span className='sidebarChannelHash'><ChatIcon /></span>
-        楽しいチャット
+        {channel.channel.channleName}
       </h4>
     </div>
   )
