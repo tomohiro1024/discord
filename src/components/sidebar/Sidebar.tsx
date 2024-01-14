@@ -6,34 +6,13 @@ import SidebarChannel from './SidebarChannel';
 import { auth, db } from '../../firebase';
 import { useAppSelector } from '../../app/hooks';
 // import { collection, query } from 'firebase/firestore/lite';
-import { onSnapshot, collection, query, DocumentData } from 'firebase/firestore'
 import { channel } from 'diagnostics_channel';
-
-interface Channel {
-  id: string;
-  channel: DocumentData;
-}
+import useCollection from '../../hooks/useCollection';
 
 const Sidebar = () => {
-  const [channels, setChannels] = useState<Channel[]>([])
-  // 現状のユーザーの情報を取得
+
   const user = useAppSelector((state) => state.user)
-
-  const q = query(collection(db, "channels"))
-
-  useEffect(() => {
-    onSnapshot(q, (querySnapshot) =>{
-      const channelsResults: Channel[] =[]
-      querySnapshot.docs.forEach((doc) => 
-      // console.log(doc.id, doc.data())
-      channelsResults.push({
-        id: doc.id,
-        channel: doc.data()
-      })
-      )
-      setChannels(channelsResults)
-    })
-  }, [])
+  const {documents: channels} = useCollection("channels")
 
   const [showDialog, setShowDialog] = useState(false);
   const handleSignOut = () => {
