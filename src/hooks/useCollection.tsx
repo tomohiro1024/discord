@@ -16,6 +16,7 @@ const useCollection = (data: string) => {
   const collectionRef: Query<DocumentData> = query(collection(db, data))
 
   useEffect(() => {
+    // リアルタイムでデータ取得
     onSnapshot(collectionRef, (querySnapshot) =>{
       const channelsResults: Channels[] =[]
       querySnapshot.docs.forEach((doc) => 

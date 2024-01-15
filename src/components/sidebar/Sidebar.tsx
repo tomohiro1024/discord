@@ -8,11 +8,21 @@ import { useAppSelector } from '../../app/hooks';
 // import { collection, query } from 'firebase/firestore/lite';
 import { channel } from 'diagnostics_channel';
 import useCollection from '../../hooks/useCollection';
+import { addDoc, collection } from 'firebase/firestore';
 
 const Sidebar = () => {
 
   const user = useAppSelector((state) => state.user)
   const {documents: channels} = useCollection("channels")
+
+  const addChannel = async () => {
+    let channelName: string | null = prompt("新しいチャンネルを作成")
+    if(channelName) {
+      await addDoc(collection(db, 'channels'), {
+        channleName: channelName
+      })
+    }
+  }
 
   const [showDialog, setShowDialog] = useState(false);
   const handleSignOut = () => {
@@ -56,7 +66,7 @@ const Sidebar = () => {
             <div className='sidebarHeader'>
               <h4>トークチャンネル</h4>
             </div>
-            <AddCircleIcon className='sidebarIcon' />
+            <AddCircleIcon className='sidebarIcon' onClick={() => addChannel()} />
           </div>
           <div className='sidebarChannelList'>
             {channels.map((channel) => (
