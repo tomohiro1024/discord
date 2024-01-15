@@ -1,3 +1,5 @@
+// 型定義
+
 export interface initialUserState {
   user: null | {
     uid: string;
@@ -5,4 +7,9 @@ export interface initialUserState {
     email: string;
     displayName: string;
   }
+}
+
+export interface initialChannelState {
+  channelId: string | null;
+  channelName: string | null;
 }
