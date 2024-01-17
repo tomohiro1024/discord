@@ -7,12 +7,13 @@ import { useAppSelector } from '../../app/hooks';
 
 const Chat = () => {
   // 現在のユーザーの状態を取得
-  // const channelName = useAppSelector((state) => state.channelName)
+  const channelName = useAppSelector((state) => state.channel.channelName)
+  console.log(channelName)
 
 
   return (
     <div className='chat'>
-      <ChatHeader />
+      <ChatHeader channelName={channelName}/>
       <div className='chatMessage'>
         <ChatMessage />
         <ChatMessage />
