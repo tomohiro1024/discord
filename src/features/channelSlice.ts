@@ -6,7 +6,7 @@ const initialState: initialChannelState = {
   channelName: null,
 }
 
-// channelSliceはユーザーがログイン、ログアウトしているかなどの監視をしている。
+// channelSliceは
 export const channelSlice = createSlice({
   name: "channel",
   initialState: initialState,
