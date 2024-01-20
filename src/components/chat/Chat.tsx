@@ -4,6 +4,8 @@ import ChatHeader from './ChatHeader'
 import ChatMessage from './ChatMessage'
 import ChatIcon from '@mui/icons-material/Chat';
 import { useAppSelector } from '../../app/hooks';
+import { collection } from 'firebase/firestore';
+import { db } from '../../firebase';
 
 const Chat = () => {
   const [inputText, setInputText] = useState<string>("") 
@@ -11,13 +13,15 @@ const Chat = () => {
   console.log(inputText)
 
   // 現在のユーザーの状態を取得
-  const channelName = useAppSelector((state) => state.channel.channelName)
+  const channelName = useAppSelector((state) => state.channel.channelId)
   console.log(channelName)
 
   const sendMessage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     // メッセージを送信した時、ページのリロードを防ぐ
     e.preventDefault()
-    console.log("send")
+    
+    // channelsコレクションの中のmessageコレクションの中にメッセージ情報を入れる。
+    const collectionRef = collection(db, "channels")
   }
 
 
