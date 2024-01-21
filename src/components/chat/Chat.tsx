@@ -4,7 +4,7 @@ import ChatHeader from './ChatHeader'
 import ChatMessage from './ChatMessage'
 import ChatIcon from '@mui/icons-material/Chat';
 import { useAppSelector } from '../../app/hooks';
-import { collection } from 'firebase/firestore';
+import { CollectionReference, DocumentData, DocumentReference, addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase';
 
 const Chat = () => {
@@ -12,16 +12,29 @@ const Chat = () => {
 
   console.log(inputText)
 
-  // 現在のユーザーの状態を取得
-  const channelName = useAppSelector((state) => state.channel.channelId)
+  // チャンネル名の取得
+  const channelName = useAppSelector((state) => state.channel.channelName)
   console.log(channelName)
+  // クリックしたチャンネルID
+  const channelId = useAppSelector((state) => state.channel.channelId)
 
-  const sendMessage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  // ログインしているユーザーの取得
+  const user = useAppSelector((state) => state.user.user)
+
+  const sendMessage = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     // メッセージを送信した時、ページのリロードを防ぐ
     e.preventDefault()
     
     // channelsコレクションの中のmessageコレクションの中にメッセージ情報を入れる。
-    const collectionRef = collection(db, "channels")
+    const collectionRef: CollectionReference<DocumentData> = collection(db, "channels", String(channelId), "messages" )
+
+    const docRef: DocumentReference<DocumentData> = await addDoc(collectionRef, {
+      // inputTextはテキストフィールドに入力した値
+      message: inputText,
+      timestamp: serverTimestamp(),
+      user: user,
+    })
+    console.log(docRef)
   }
 
 
