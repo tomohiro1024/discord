@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Chat.scss'
 import ChatHeader from './ChatHeader'
 import ChatMessage from './ChatMessage'
 import ChatIcon from '@mui/icons-material/Chat';
 import { useAppSelector } from '../../app/hooks';
-import { CollectionReference, DocumentData, DocumentReference, addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { CollectionReference, DocumentData, DocumentReference, addDoc, collection, onSnapshot, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase';
 
 const Chat = () => {
@@ -20,6 +20,22 @@ const Chat = () => {
 
   // ログインしているユーザーの取得
   const user = useAppSelector((state) => state.user.user)
+
+  // useEffectの第2引数にはチャンネル名をクリックする度に発火させたい
+  useEffect(() => {
+
+let collectionRef = collection(
+  db,
+  "channels",
+  String(channelId),
+  "messages",
+)
+
+    onSnapshot(collectionRef, (snapshot) => {
+
+    })
+
+  }, [channelId])
 
   const sendMessage = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     // メッセージを送信した時、ページのリロードを防ぐ

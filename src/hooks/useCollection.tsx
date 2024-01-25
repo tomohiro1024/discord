@@ -12,11 +12,10 @@ interface Channels {
 const useCollection = (data: string) => {
   const [documents, setDocuments] = useState<Channels[]>([])
   // 現状のユーザーの情報を取得
-
   const collectionRef: Query<DocumentData> = query(collection(db, data))
 
   useEffect(() => {
-    // リアルタイムでデータ取得
+    // リアルタイムでデータ取得したい時onSnapshotを使う
     onSnapshot(collectionRef, (querySnapshot) =>{
       const channelsResults: Channels[] =[]
       querySnapshot.docs.forEach((doc) => 
